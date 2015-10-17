@@ -27,7 +27,7 @@ VARIANT="$3"
 BUILD="$TOP/build"
 CACHE="$TOP/cache"
 OUT="$TOP/out"
-SOURCES="$TOP/sources"
+SOURCES=${SOURCES:-"$TOP/sources"}
 SCRIPTS="$TOP/scripts"
 CERTIFICATES="$SCRIPTS/certificates"
 . "$SCRIPTS/inc.aromadata.sh"
