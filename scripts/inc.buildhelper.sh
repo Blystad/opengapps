@@ -148,6 +148,16 @@ buildapk() {
   fi
 }
 
+install_lib() {
+  sourceapk="$1"
+  targetdir="$2"
+  libpath="$3"
+  libsearchpath="$4"
+
+  install -d "$targetdir/$libpath"
+  unzip -qq -j -o "$sourceapk" "$libsearchpath" -x "lib/*/crazy.*" -d "$targetdir/$libpath" 2>/dev/null
+}
+
 buildlib() {
   sourceapk="$1"
   targetdir="$build/$2"
@@ -183,13 +193,11 @@ buildlib() {
   if [ "$API" -lt "23" ]; then #libextraction is only necessary on pre-Marshmallow
     if [ -n "$(unzip -Z -1 "$sourceapk" "$libsearchpath" 2>/dev/null)" ]
     then
-      install -d "$targetdir/$libpath"
-      unzip -qq -j -o "$sourceapk" "$libsearchpath" -x "lib/*/crazy.*" -d "$targetdir/$libpath" 2>/dev/null
+      install_lib "$sourceapk" "$targetdir" "$libpath" "$libsearchpath"
     fi
     if [ "$apkarch" != "$fallback_arch" ] && [ -n "$(unzip -Z -1 "$sourceapk" "$libfallbacksearchpath" 2>/dev/null)" ]
     then
-      install -d "$targetdir/$fallbacklibpath"
-      unzip -qq -j -o "$sourceapk" "$libfallbacksearchpath" -x "lib/*/crazy.*" -d "$targetdir/$fallbacklibpath" 2>/dev/null
+      install_lib "$sourceapk" "$targetdir" "$fallbacklibpath" "$libfallbacksearchpath"
     fi
   fi
 }
