@@ -1,7 +1,7 @@
 #!/bin/bash -e
 ARCH="$1"
 API="$2"
-VARIANT="super"
+VARIANT="$3"
 VENDOR_PATH=vendor/opengapps
 VENDOR_ABSOLUTE_PATH="${ANDROID_BUILD_TOP}/${VENDOR_PATH}"
 SOURCES="${VENDOR_ABSOLUTE_PATH}/sources"
