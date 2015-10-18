@@ -29,6 +29,7 @@ $(OPENGAPPS_CHECK_FILE): $(OPENGAPPS_GENERATE_SCRIPT)
 	@echo "----- Generated OpenGapps Makefiles -----"
 	$(hide) touch $(OPENGAPPS_CHECK_FILE)
 
-$(OPENGAPPS_PRODUCT_MK): $(OPENGAPPS_CHECK_FILE)
 .PHONY: opengapps
 opengapps: $(OPENGAPPS_CHECK_FILE)
+
+droidcore: $(OPENGAPPS_CHECK_FILE)
